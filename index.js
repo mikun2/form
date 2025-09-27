@@ -21,8 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
   auth: {
     user: "Mikun5y@gmail.com", // Replace with your email
     pass: "ewqd npti edao xqvj", // Replace with your app password
