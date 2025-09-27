@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     pass: "ewqd npti edao xqvj", // Replace with your app password
 //   },
 // });
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
   port: 587,
