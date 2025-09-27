@@ -19,7 +19,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configure Nodemailer transporter - FIXED VERSION
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587, // Changed from 465 to 587
   secure: false, // Changed from true to false for port 587
