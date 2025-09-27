@@ -19,35 +19,14 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configure Nodemailer transporter
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.gmail.com",
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: "Mikun5y@gmail.com", // Replace with your email
-//     pass: "ewqd npti edao xqvj", // Replace with your app password
-//   },
-// });
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: 'Mikun5y@gmail.com',
-    pass: 'rwzs rmuq slgr vcgz'
+    user: "Mikun5y@gmail.com", // Replace with your email
+    pass: "rwzs rmuq slgr vcgz", // Replace with your app password
   },
-  tls: {
-    rejectUnauthorized: false,
-    ciphers: 'SSLv3'
-  },
-  connectionTimeout: 60000,
-  greetingTimeout: 30000,
-  socketTimeout: 60000,
-  pool: true,
-  maxConnections: 1,
-  rateDelta: 20000,
-  rateLimit: 5,
 });
 // Helper function to send email
 function sendEmail(subject, text) {
