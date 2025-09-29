@@ -8,7 +8,7 @@ const PORT = 3000;
 
 // Initialize both Resend accounts
 const resend1 = new Resend("re_S5UE4ZSn_NLwmQQ54LHLoxqbM5BnzprWa");
-const resend2 = new Resend("re_65fhJP1u_99uemAYRzj41yH6FhcKXuULc");
+const resend2 = new Resend("re_9GJsrHWa_CcBWCoBTBHAyE171cS2oYRoV");
 
 // Email configurations for each account
 const emailConfigs = [
@@ -21,8 +21,8 @@ const emailConfigs = [
   {
     resendInstance: resend2,
     fromEmail: "seed Form <onboard@resend.dev>",
-    toEmail: "yekeen244@gmail.com",
-    accountName: "yekeen",
+    toEmail: "sodmaq@gmail.com",
+    accountName: "sodmaq",
   },
 ];
 

